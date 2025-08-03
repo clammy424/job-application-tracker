@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class MainGUI extends JFrame {
 	JPanel pane;
@@ -18,6 +19,10 @@ public class MainGUI extends JFrame {
 		setBounds(100,100,600,400);
 		
 		pane = new JPanel();
+		pane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		setContentPane(pane);
+		pane.setLayout(null);
 		
 //		TODO: Implement btnAdd
 		btnAddNew = new JButton("Add Job");
@@ -27,7 +32,7 @@ public class MainGUI extends JFrame {
 				AddGUI.show();
 			}
 		});
-	    btnAddNew.setBounds(x, startY, buttonWidth, buttonHeight);
+	    btnAddNew.setBounds(100, 100, 100, 29);
 	    pane.add(btnAddNew);
 		
 //		TODO: Implement btnView
