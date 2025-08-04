@@ -9,10 +9,8 @@ import javax.swing.border.EmptyBorder;
 public class MainGUI extends JFrame {
 	JPanel pane;
 	JButton btnAddNew;
-	JButton btnView;
 	JButton btnDelete;
 	JTextField txtSearch;
-	JList list;
 	
 	public MainGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,12 +30,21 @@ public class MainGUI extends JFrame {
 				AddGUI.show();
 			}
 		});
-	    btnAddNew.setBounds(100, 100, 100, 29);
+	    btnAddNew.setBounds(450, 50, 100, 29);
 	    pane.add(btnAddNew);
 		
-//		TODO: Implement btnView
-		
-		
 //		TODO: Implement btnDelete
+		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			// implement
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnDelete.setBounds(450, 100, 100, 29);
+		pane.add(btnDelete);
+
+		// TODO: view JList
+
+		// TODO: Implement view one job feature
 	}
 }
