@@ -85,7 +85,7 @@ public class Job {
     }
 
     public String toString() {
-        String s = id + "," + this.company + "," + this.role + "," + this.status + "," + this.salary + "," + this.location;
+        String s = id + "," + this.company + "," + this.role + "," + this.salary + "," + this.status + "," + this.location;
         return s;
     }
 

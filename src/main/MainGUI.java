@@ -14,6 +14,7 @@ public class MainGUI extends JFrame {
 	private JPanel pane;
 	private JButton btnAddNew;
 	private JButton btnDelete;
+	private JButton btnEdit;
 	private JTextField txtSearch;
 	private FileManager fm;
 	private JobTableModel jobTableModel;
@@ -102,6 +103,8 @@ public class MainGUI extends JFrame {
 		btnDelete.setBounds(475, 85, 100, 29);
 		pane.add(btnDelete);
 
+
+		
 		// TODO: Implement view one job feature
 		jobTable.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -122,5 +125,6 @@ public class MainGUI extends JFrame {
 				}
 			}
 		});
+	
 	}
 }
