@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -31,8 +32,19 @@ public class MainGUI extends JFrame {
 		setContentPane(pane);
 		pane.setLayout(null);
 
-//		TODO: Implement search feature
+		JLabel title = new JLabel("Job Application Tracker");
+		Font titleFont = new Font("Arial",Font.PLAIN,24);
+		title.setBounds(50,10,350,40);
+		title.setFont(titleFont);
+		pane.add(title);
 
+//		TODO: Implement search feature
+		JLabel search = new JLabel("Search: ");
+		search.setBounds(50,50,100,20);
+		JTextField searchBar = new JTextField();
+		searchBar.setBounds(100,50,353,26);
+		pane.add(search);
+		pane.add(searchBar);
 
 		// TODO: view list of jobs
 		ArrayList<Job> jobList = fm.loadJobs();
@@ -45,7 +57,7 @@ public class MainGUI extends JFrame {
 		jobTable.getColumnModel().getColumn(0).setMinWidth(0);
 		jobTable.getColumnModel().getColumn(0).setMaxWidth(0);
 		jobTable.getColumnModel().getColumn(0).setWidth(0);
-		scrollPane.setBounds(50, 80, 350, 200);
+		scrollPane.setBounds(50, 90, 400, 250);
 		pane.add(scrollPane);
 
 		
@@ -57,7 +69,7 @@ public class MainGUI extends JFrame {
 				AddNewGUI.show();
 			}
 		});
-	    btnAddNew.setBounds(450, 50, 100, 29);
+	    btnAddNew.setBounds(475, 50, 100, 29);
 	    pane.add(btnAddNew);
 		
 //		TODO: Implement btnDelete
@@ -85,7 +97,7 @@ public class MainGUI extends JFrame {
 				}
 			}
 		});
-		btnDelete.setBounds(450, 85, 100, 29);
+		btnDelete.setBounds(475, 85, 100, 29);
 		pane.add(btnDelete);
 
 		// TODO: Implement view one job feature
