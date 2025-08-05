@@ -8,10 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileManager {
-    private String fileName = "";
+    private String fileName = "job_storer";
 
-    public FileManager(String fileName) {
-        this.fileName = fileName;
+    public FileManager() {
     }
 
     public void save(Job job) {
@@ -23,7 +22,7 @@ public class FileManager {
         }
     }
 
-    public ArrayList<Job> load() {
+    public ArrayList<Job> loadJobs() {
         ArrayList<Job> entries = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;

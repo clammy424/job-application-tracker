@@ -3,20 +3,16 @@ package main;
 import java.util.List;
 
 public class Job {
-    private static int id = 0;
     private String company;
     private String role;
     private String salary;
+    private String status;
 
-    // unsure todo type
-    private List<Todo> todo;
-
-    public Job(String company, String role, String salary, Todo todo) {
-        ++id;
+    public Job(String company, String role, String salary, String status) {
         this.company = company;
         this.role = role;
         this.salary = salary;
-        this.todo = todo;
+        this.status = status;
     }
     
     public String getCompany() {
@@ -43,20 +39,12 @@ public class Job {
         this.salary = salary;
     }
 
-    public Todo getTodo() {
-        return todo;
+    public String getStatus() {
+        return status;
     }
 
-    public void setTodo(Todo todo) {
-        this.todo = todo;
-    }
-
-    public String toString() {
-
-    }
-
-    public static Job parser(String line) {
-
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }
