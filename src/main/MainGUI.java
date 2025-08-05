@@ -35,10 +35,16 @@ public class MainGUI extends JFrame {
 
 
 		// TODO: view list of jobs
+		ArrayList<Job> jobList = fm.loadJobs();
 		jobTableModel = new JobTableModel();
+		for (Job j : jobList) {
+			jobTableModel.addJob(j);
+		}
 		jobTable = new JTable(jobTableModel);
 		scrollPane = new JScrollPane(jobTable);
-
+		jobTable.getColumnModel().getColumn(0).setMinWidth(0);
+		jobTable.getColumnModel().getColumn(0).setMaxWidth(0);
+		jobTable.getColumnModel().getColumn(0).setWidth(0);
 		scrollPane.setBounds(50, 80, 350, 200);
 		pane.add(scrollPane);
 
@@ -74,27 +80,25 @@ public class MainGUI extends JFrame {
 		btnDelete.setBounds(450, 85, 100, 29);
 		pane.add(btnDelete);
 
-		
-
 		// TODO: Implement view one job feature
-		// jobList.addMouseListener(new MouseAdapter() {
-		// 	public void mouseClicked(MouseEvent e) {
-		// 		if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {
-		// 			JList<?> list = (JList<?>) e.getSource();
-		// 			int index = list.locationToIndex(e.getPoint());
-		
-		// 			if (index != -1) {
-		// 				Object selectedItem = list.getModel().getElementAt(index);
+		jobTable.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {
+					jobTable = (JTable) e.getSource();
+					int row = jobTable.rowAtPoint(e.getPoint());
+
+					if (row != -1) {
+						int id = (int) jobTable.getValueAt(row, 0);
 						
-		// 				// Open the new GUI and pass the selected job
-		// 				if (selectedItem instanceof Job) {
-		// 					Job selectedJob = (Job) selectedItem;
-		// 					JobGUI jobGUI = new JobGUI(selectedJob);
-		// 					jobGUI.setVisible(true);  // open only once per double-click
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// });
+						Job j = fm.findByID(id);
+						if (j != null) {
+							JobGUI jobGUI = new JobGUI(j);
+							jobGUI.setVisible(true);  // open only once per double-click
+						}
+
+					}
+				}
+			}
+		});
 	}
 }

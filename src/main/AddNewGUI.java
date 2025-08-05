@@ -96,6 +96,7 @@ public class AddNewGUI extends JFrame {
                 txtRole.setText("");
                 txtStatus.setText("");
                 txtSalary.setText("");
+                txtLocation.setText("");
 			}
 		});
 	    btnReset.setBounds(450, 85, 100, 29);

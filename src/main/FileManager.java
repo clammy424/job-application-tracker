@@ -36,4 +36,19 @@ public class FileManager {
         return entries;
     }
 
+    public Job findByID(int id) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] split = line.split(",");
+                if (Integer.valueOf(split[0]) == id) {
+                    return Job.parser(line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
