@@ -6,14 +6,13 @@ public class Job {
     private String company;
     private String role;
     private String salary;
+    private String status;
 
-    // unsure todo type
-    private List<Todo> todo;
-
-    public Job(String company, String role, String salary, Todo todo) {
+    public Job(String company, String role, String salary, String status) {
         this.company = company;
         this.role = role;
         this.salary = salary;
+        this.status = status;
     }
     
     public String getCompany() {
@@ -40,12 +39,12 @@ public class Job {
         this.salary = salary;
     }
 
-    public String toString() {
-
+    public String getStatus() {
+        return status;
     }
 
-    public static Job parser(String line) {
-
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

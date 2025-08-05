@@ -20,7 +20,7 @@ public class AddNewGUI extends JFrame {
     private JButton btnReset;
     private JButton btnCancel;
 
-    public AddNewGUI(DefaultListModel<Job> jobListModel) {
+    public AddNewGUI(JobTableModel jobTableModel) {
 		setBounds(100,100,600,400);
 		
 		pane = new JPanel();
@@ -30,46 +30,46 @@ public class AddNewGUI extends JFrame {
 		pane.setLayout(null);
 
         lblCompany = new JLabel("Company:");
-        lblCompany.setBounds(70, 35, 100, 16);
+        lblCompany.setBounds(70, 35, 100, 26);
         pane.add(lblCompany);
 
         txtCompany = new JTextField();
-        txtCompany.setBounds(150, 35, 200, 16);
+        txtCompany.setBounds(150, 35, 200, 26);
         pane.add(txtCompany);
 
         lblRole = new JLabel("Role:");
-        lblRole.setBounds(70, 70, 100, 16);
+        lblRole.setBounds(70, 70, 100, 26);
         pane.add(lblRole);
 
         txtRole = new JTextField();
-        txtRole.setBounds(150, 70, 200, 16);
+        txtRole.setBounds(150, 70, 200, 26);
         pane.add(txtRole);
 
         lblStatus = new JLabel("Status:");
-        lblStatus.setBounds(70, 105, 100, 16);
+        lblStatus.setBounds(70, 105, 100, 26);
         pane.add(lblStatus);
 
         txtStatus= new JTextField();
-        txtStatus.setBounds(150, 105, 200, 16);
+        txtStatus.setBounds(150, 105, 200, 26);
         pane.add(txtStatus);
 
         lblSalary = new JLabel("Salary:");
-        lblSalary.setBounds(70, 140, 100, 16);
+        lblSalary.setBounds(70, 140, 100, 26);
         pane.add(lblSalary);
 
         txtSalary = new JTextField();
-        txtSalary.setBounds(150, 140, 200, 16);
+        txtSalary.setBounds(150, 140, 200, 26);
         pane.add(txtSalary);
 
         btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                String company = txtCompany.toString();
-                String role = txtRole.toString();
-                String salary = txtSalary.toString();
-                String status = txtStatus.toString();
+                String company = txtCompany.getText();
+                String role = txtRole.getText();
+                String salary = txtSalary.getText();
+                String status = txtStatus.getText();
                 Job j = new Job(company,role,salary,status);
-                jobListModel.addElement(j);
+                jobTableModel.addJob(j);
                 
                 dispose();
 			}

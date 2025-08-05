@@ -15,8 +15,8 @@ public class MainGUI extends JFrame {
 	private JButton btnDelete;
 	private JTextField txtSearch;
 	private FileManager fm;
-	private DefaultListModel<Job> jobListModel;
-	private JList<Job> jobList;
+	private JobTableModel jobTableModel;
+	private JTable jobTable;
 	private JScrollPane scrollPane;
 	
 	public MainGUI() {
@@ -31,21 +31,23 @@ public class MainGUI extends JFrame {
 		setContentPane(pane);
 		pane.setLayout(null);
 
+//		TODO: Implement search feature
+
+
 		// TODO: view list of jobs
-		jobListModel = new DefaultListModel<>();
-		jobList = new JList<>(jobListModel);
-		scrollPane = new JScrollPane(jobList);
+		jobTableModel = new JobTableModel();
+		jobTable = new JTable(jobTableModel);
+		scrollPane = new JScrollPane(jobTable);
+
 		scrollPane.setBounds(50, 80, 350, 200);
 		pane.add(scrollPane);
-
-//		TODO: Implement search feature
 
 		
 //		TODO: Implement btnAdd
 		btnAddNew = new JButton("Add Job");
 		btnAddNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddNewGUI AddNewGUI = new AddNewGUI(jobListModel);
+				AddNewGUI AddNewGUI = new AddNewGUI(jobTableModel);
 				AddNewGUI.show();
 			}
 		});
@@ -59,11 +61,10 @@ public class MainGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				ArrayList<Job> jobs = fm.loadJobs();
-				int index = jobList.getSelectedIndex();
+				int index = jobTable.getSelectedRow();
 				
 				if (index != -1) {
-					Job jobToDelete = jobListModel.getElementAt(index);
-					jobListModel.remove(index);
+					jobTableModel.removeRow(index);
 
 					// remove from array list jobs
 					// write to update data file
@@ -76,24 +77,24 @@ public class MainGUI extends JFrame {
 		
 
 		// TODO: Implement view one job feature
-		jobList.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {
-					JList<?> list = (JList<?>) e.getSource();
-					int index = list.locationToIndex(e.getPoint());
+		// jobList.addMouseListener(new MouseAdapter() {
+		// 	public void mouseClicked(MouseEvent e) {
+		// 		if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {
+		// 			JList<?> list = (JList<?>) e.getSource();
+		// 			int index = list.locationToIndex(e.getPoint());
 		
-					if (index != -1) {
-						Object selectedItem = list.getModel().getElementAt(index);
+		// 			if (index != -1) {
+		// 				Object selectedItem = list.getModel().getElementAt(index);
 						
-						// Open the new GUI and pass the selected job
-						if (selectedItem instanceof Job) {
-							Job selectedJob = (Job) selectedItem;
-							JobGUI jobGUI = new JobGUI(selectedJob);
-							jobGUI.setVisible(true);  // open only once per double-click
-						}
-					}
-				}
-			}
-		});
+		// 				// Open the new GUI and pass the selected job
+		// 				if (selectedItem instanceof Job) {
+		// 					Job selectedJob = (Job) selectedItem;
+		// 					JobGUI jobGUI = new JobGUI(selectedJob);
+		// 					jobGUI.setVisible(true);  // open only once per double-click
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// });
 	}
 }
