@@ -12,15 +12,17 @@ public class AddNewGUI extends JFrame {
     private JLabel lblRole;
     private JLabel lblStatus;
     private JLabel lblSalary;
+    private JLabel lblLocation;
     private JTextField txtCompany;
     private JTextField txtRole;
     private JTextField txtStatus;
     private JTextField txtSalary;
+    private JTextField txtLocation;
     private JButton btnSave;
     private JButton btnReset;
     private JButton btnCancel;
 
-    public AddNewGUI(JobTableModel jobTableModel) {
+    public AddNewGUI(JobTableModel jobTableModel, FileManager fm) {
 		setBounds(100,100,600,400);
 		
 		pane = new JPanel();
@@ -61,6 +63,14 @@ public class AddNewGUI extends JFrame {
         txtSalary.setBounds(150, 140, 200, 26);
         pane.add(txtSalary);
 
+        lblLocation = new JLabel("Location:");
+        lblLocation.setBounds(70, 175, 100, 26);
+        pane.add(lblLocation);
+
+        txtLocation = new JTextField();
+        txtLocation.setBounds(150, 175, 200, 26);
+        pane.add(txtLocation);
+
         btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -68,8 +78,10 @@ public class AddNewGUI extends JFrame {
                 String role = txtRole.getText();
                 String salary = txtSalary.getText();
                 String status = txtStatus.getText();
-                Job j = new Job(company,role,salary,status);
+                String location = txtLocation.getText();
+                Job j = new Job(company,role,salary,status,location);
                 jobTableModel.addJob(j);
+                fm.save(j);
                 
                 dispose();
 			}

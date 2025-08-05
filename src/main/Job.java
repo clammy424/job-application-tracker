@@ -1,18 +1,18 @@
 package main;
 
-import java.util.List;
-
 public class Job {
     private String company;
     private String role;
     private String salary;
     private String status;
+    private String location;
 
-    public Job(String company, String role, String salary, String status) {
+    public Job(String company, String role, String salary, String status, String location) {
         this.company = company;
         this.role = role;
         this.salary = salary;
         this.status = status;
+        this.location = location;
     }
     
     public String getCompany() {
@@ -45,6 +45,19 @@ public class Job {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String toString() {
+        String s = this.company + "," + this.role + "," + this.status + "," + this.salary + "," + this.location;
+        return s;
     }
 
 }
