@@ -1,6 +1,9 @@
 package main;
 
 public class Job {
+    private static int count = 0;
+
+    private int id;
     private String company;
     private String role;
     private String salary;
@@ -8,6 +11,15 @@ public class Job {
     private String location;
 
     public Job(String company, String role, String salary, String status, String location) {
+        id = ++count;
+        this.company = company;
+        this.role = role;
+        this.salary = salary;
+        this.status = status;
+        this.location = location;
+    }
+    public Job(int id, String company, String role, String salary, String status, String location) {
+        this.id = id;
         this.company = company;
         this.role = role;
         this.salary = salary;
@@ -55,9 +67,29 @@ public class Job {
         this.location = location;
     }
 
+    public int getID() {
+        return id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
+    }
+
     public String toString() {
-        String s = this.company + "," + this.role + "," + this.status + "," + this.salary + "," + this.location;
+        String s = id + "," + this.company + "," + this.role + "," + this.status + "," + this.salary + "," + this.location;
         return s;
+    }
+
+    public static Job parser(String line) {
+        String[] split = line.split(",");
+        int id = Integer.valueOf(split[0]);
+        String company = split[1];
+        String role = split[2];
+        String salary = split[3];
+        String status = split[4];
+        String location = split[5];
+        Job j = new Job(id, company,role,salary,status,location);
+        return j;
     }
 
 }
