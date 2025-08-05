@@ -90,15 +90,31 @@ public class Job {
     }
 
     public static Job parser(String line) {
-        String[] split = line.split(",");
-        int id = Integer.valueOf(split[0]);
-        String company = split[1];
-        String role = split[2];
-        String salary = split[3];
-        String status = split[4];
-        String location = split[5];
-        Job j = new Job(id, company,role,salary,status,location);
-        return j;
-    }
+        if (line == null || line.trim().isEmpty()) {
+            // skip empty lines
+            return null;
+        }
 
+        String[] split = line.split(",", -1); // -1 preserves trailing empty strings
+
+        if (split.length < 6) {
+            System.out.println("Skipping line: not enough fields -> " + line);
+            return null;
+        }
+
+        try {
+            int id = Integer.parseInt(split[0].trim());
+
+            String company = split[1].trim();
+            String role = split[2].trim();
+            String salary = split[3].trim();
+            String status = split[4].trim();
+            String location = split[5].trim();
+
+            return new Job(id, company, role, salary, status, location);
+        } catch (NumberFormatException e) {
+            System.out.println("Skipping line: invalid ID -> " + line);
+            return null;
+        }
+    }
 }

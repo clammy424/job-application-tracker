@@ -50,7 +50,9 @@ public class MainGUI extends JFrame {
 		ArrayList<Job> jobList = fm.loadJobs();
 		jobTableModel = new JobTableModel();
 		for (Job j : jobList) {
-			jobTableModel.addJob(j);
+			if (j != null) {
+				jobTableModel.addJob(j);
+			}
 		}
 		jobTable = new JTable(jobTableModel);
 		scrollPane = new JScrollPane(jobTable);
