@@ -70,10 +70,18 @@ public class MainGUI extends JFrame {
 				int index = jobTable.getSelectedRow();
 				
 				if (index != -1) {
-					jobTableModel.removeRow(index);
-
+					
 					// remove from array list jobs
+					for (Job j : jobs) {
+						if (j.getID() == (int) jobTableModel.getValueAt(index, 0)) {
+							jobs.remove(j);
+							break;
+						}
+					}
+					// remove from table model to update JTable visually
+					jobTableModel.removeRow(index);
 					// write to update data file
+					fm.rewrite(jobs);
 				}
 			}
 		});

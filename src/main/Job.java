@@ -18,6 +18,7 @@ public class Job {
         this.status = status;
         this.location = location;
     }
+    
     public Job(int id, String company, String role, String salary, String status, String location) {
         this.id = id;
         this.company = company;
@@ -73,6 +74,14 @@ public class Job {
 
     public void setID(int id) {
         this.id = id;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        Job.count = count;
     }
 
     public String toString() {

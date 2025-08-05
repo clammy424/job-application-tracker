@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,7 +37,7 @@ public class AddNewGUI extends JFrame {
         pane.add(lblCompany);
 
         txtCompany = new JTextField();
-        txtCompany.setBounds(150, 35, 200, 26);
+        txtCompany.setBounds(165, 35, 200, 26);
         pane.add(txtCompany);
 
         lblRole = new JLabel("Role:");
@@ -44,7 +45,7 @@ public class AddNewGUI extends JFrame {
         pane.add(lblRole);
 
         txtRole = new JTextField();
-        txtRole.setBounds(150, 70, 200, 26);
+        txtRole.setBounds(165, 70, 200, 26);
         pane.add(txtRole);
 
         lblStatus = new JLabel("Status:");
@@ -52,15 +53,20 @@ public class AddNewGUI extends JFrame {
         pane.add(lblStatus);
 
         txtStatus= new JTextField();
-        txtStatus.setBounds(150, 105, 200, 26);
+        txtStatus.setBounds(165, 105, 200, 26);
         pane.add(txtStatus);
 
         lblSalary = new JLabel("Salary:");
+        JLabel note = new JLabel("enter numbers only");
         lblSalary.setBounds(70, 140, 100, 26);
+        note.setBounds(70, 155, 100, 26);
+        Font noteFont = new Font("Arial", Font.PLAIN, 10);
+        note.setFont(noteFont);
         pane.add(lblSalary);
+        pane.add(note);
 
         txtSalary = new JTextField();
-        txtSalary.setBounds(150, 140, 200, 26);
+        txtSalary.setBounds(165, 140, 200, 26);
         pane.add(txtSalary);
 
         lblLocation = new JLabel("Location:");
@@ -68,7 +74,7 @@ public class AddNewGUI extends JFrame {
         pane.add(lblLocation);
 
         txtLocation = new JTextField();
-        txtLocation.setBounds(150, 175, 200, 26);
+        txtLocation.setBounds(165, 175, 200, 26);
         pane.add(txtLocation);
 
         btnSave = new JButton("Save");
@@ -79,6 +85,7 @@ public class AddNewGUI extends JFrame {
                 String salary = txtSalary.getText();
                 String status = txtStatus.getText();
                 String location = txtLocation.getText();
+                Job.setCount(fm.maxID());
                 Job j = new Job(company,role,salary,status,location);
                 jobTableModel.addJob(j);
                 fm.save(j);
