@@ -51,4 +51,31 @@ public class FileManager {
         return null;
     }
 
+    public int maxID() {
+        int id = 1;
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] split = line.split(",");
+                if (Integer.valueOf(split[0]) > id) {
+                    id = Integer.valueOf(split[0]);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public void rewrite(ArrayList<Job> jobs) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false))) { // false ensures overwrite
+            for (Job j : jobs) {
+                writer.write(j.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
+    }
+
 }
