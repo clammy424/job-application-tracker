@@ -47,7 +47,7 @@ public class MainGUI extends JFrame {
 		btnAddNew = new JButton("Add Job");
 		btnAddNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddNewGUI AddNewGUI = new AddNewGUI(jobTableModel);
+				AddNewGUI AddNewGUI = new AddNewGUI(jobTableModel, fm);
 				AddNewGUI.show();
 			}
 		});
