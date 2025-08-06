@@ -66,7 +66,7 @@ public class JobGUI extends JFrame {
 
         // Example: Add 50 to-do items
         for (Task task : job.getTodoList().getAllTasks()) {
-            JLabel label = new JLabel("• Task " + task.toString());
+            JLabel label = new JLabel("• " + task.toString());
             todoPanel.add(label);
         }
 

@@ -19,9 +19,12 @@ public class AddNewGUI extends JFrame {
     private JTextField txtStatus;
     private JTextField txtSalary;
     private JTextField txtLocation;
+    private JTextField txtTodoList;
     private JButton btnSave;
     private JButton btnReset;
     private JButton btnCancel;
+    private TodoList todoList = new TodoList();
+    private DefaultListModel<String> todoListModel = new DefaultListModel<>();
 
     public AddNewGUI(JobTableModel jobTableModel, FileManager fm) {
 		setBounds(100,100,600,400);
@@ -77,6 +80,28 @@ public class AddNewGUI extends JFrame {
         txtLocation.setBounds(165, 175, 200, 26);
         pane.add(txtLocation);
 
+        //todo list
+        txtTodoList = new JTextField();
+        txtTodoList.setBounds(70, 250, 400, 26);
+        pane.add(txtTodoList);
+
+        JList<String> todoJList = new JList<>(todoListModel);
+        JScrollPane scrollPane = new JScrollPane(todoJList);
+        scrollPane.setBounds(70, 280, 400, 100);
+        pane.add(scrollPane);
+
+        // Add task when ENTER is pressed
+        txtTodoList.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String taskText = txtTodoList.getText().trim();
+                if (!taskText.isEmpty()) {
+                    todoList.addTask(taskText);            // add to the object
+                    todoListModel.addElement(taskText);    // add to the visual list
+                    txtTodoList.setText("");
+                }
+            }
+        });
+
         btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -85,7 +110,6 @@ public class AddNewGUI extends JFrame {
                 String salary = txtSalary.getText();
                 String status = txtStatus.getText();
                 String location = txtLocation.getText();
-                TodoList todoList = new TodoList(); 
                 Job.setCount(fm.maxID());
                 Job j = new Job(company,role,salary,status,location, todoList);
                 jobTableModel.addJob(j);
@@ -120,12 +144,5 @@ public class AddNewGUI extends JFrame {
 		btnCancel.setBounds(450, 120, 100, 29);
 		pane.add(btnCancel);
 
-        //todo list
-        JPanel todoPanel = new JPanel();
-        todoPanel.setLayout(new BoxLayout(todoPanel, BoxLayout.Y_AXIS));
-        //add to-do list tasks in loop
-        JScrollPane scrollPane = new JScrollPane(todoPanel);
-        scrollPane.setBounds(70, 250, 400, 100);  // below salary label
-        pane.add(scrollPane);
     }
 }
