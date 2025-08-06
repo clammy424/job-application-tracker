@@ -2,9 +2,12 @@ package main;
 
 import java.awt.Font;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 public class JobGUI extends JFrame {
@@ -57,7 +60,18 @@ public class JobGUI extends JFrame {
         lblSalary.setFont(salaryFont);
         pane.add(lblSalary);
 
+        //TODO: Implement edit and delete buttons
+        JPanel todoPanel = new JPanel();
+        todoPanel.setLayout(new BoxLayout(todoPanel, BoxLayout.Y_AXIS));
 
+        // Example: Add 50 to-do items
+        for (Task task : job.getTodoList().getAllTasks()) {
+            JLabel label = new JLabel("• Task " + task.toString());
+            todoPanel.add(label);
+        }
 
+        JScrollPane scrollPane = new JScrollPane(todoPanel);
+        scrollPane.setBounds(70, 200, 400, 100);  // below salary label
+        pane.add(scrollPane);
     }
 }

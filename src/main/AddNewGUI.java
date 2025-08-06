@@ -85,8 +85,9 @@ public class AddNewGUI extends JFrame {
                 String salary = txtSalary.getText();
                 String status = txtStatus.getText();
                 String location = txtLocation.getText();
+                TodoList todoList = new TodoList(); 
                 Job.setCount(fm.maxID());
-                Job j = new Job(company,role,salary,status,location);
+                Job j = new Job(company,role,salary,status,location, todoList);
                 jobTableModel.addJob(j);
                 fm.save(j);
                 
@@ -118,5 +119,13 @@ public class AddNewGUI extends JFrame {
 		});
 		btnCancel.setBounds(450, 120, 100, 29);
 		pane.add(btnCancel);
+
+        //todo list
+        JPanel todoPanel = new JPanel();
+        todoPanel.setLayout(new BoxLayout(todoPanel, BoxLayout.Y_AXIS));
+        //add to-do list tasks in loop
+        JScrollPane scrollPane = new JScrollPane(todoPanel);
+        scrollPane.setBounds(70, 250, 400, 100);  // below salary label
+        pane.add(scrollPane);
     }
 }
