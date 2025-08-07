@@ -87,7 +87,7 @@ public class AddNewGUI extends JFrame {
 
         JList<String> todoJList = new JList<>(todoListModel);
         JScrollPane scrollPane = new JScrollPane(todoJList);
-        scrollPane.setBounds(70, 280, 400, 100);
+        scrollPane.setBounds(70, 280, 400, 60);
         pane.add(scrollPane);
 
         // Add task when ENTER is pressed
@@ -129,6 +129,8 @@ public class AddNewGUI extends JFrame {
                 txtStatus.setText("");
                 txtSalary.setText("");
                 txtLocation.setText("");
+                txtTodoList.setText("");
+                todoListModel.clear(); // clear the visual list
 			}
 		});
 	    btnReset.setBounds(450, 85, 100, 29);

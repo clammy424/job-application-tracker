@@ -117,7 +117,7 @@ public class MainGUI extends JFrame {
 						
 						Job j = fm.findByID(id);
 						if (j != null) {
-							JobGUI jobGUI = new JobGUI(j);
+							JobGUI jobGUI = new JobGUI(j, jobTableModel, fm);
 							jobGUI.setVisible(true);  // open only once per double-click
 						}
 

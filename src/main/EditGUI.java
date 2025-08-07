@@ -60,6 +60,7 @@ public class EditGUI extends JFrame {
                 txtCompany.getText(),
                 txtLocation.getText(),
                 txtStatus.getText()
+                ToDoList.getAllTasks(); 
         );
         
         //TODO: implement updateJobAt method in JobTableModel
