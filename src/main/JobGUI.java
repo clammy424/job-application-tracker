@@ -22,7 +22,7 @@ public class JobGUI extends JFrame {
     private JTextField txtCompany, txtRole, txtStatus, txtSalary, txtLocation;
     private JTextArea txtTodoList;
     private JLabel lblCompany, lblRole, lblStatus, lblSalary, lblLocation;
-    private JButton btnCancel, btnEdit, btnSave, btnReset, btnClose;
+    private JButton btnCancel, btnEdit, btnReset, btnClose;
     private DefaultListModel<String> todoListModel = new DefaultListModel<>();
 
     private Job job;
@@ -127,14 +127,14 @@ public class JobGUI extends JFrame {
         pane.add(txtTodoList);
 
         // Cancel button
-        btnCancel = new JButton("Cancel");
+        btnCancel = new JButton("Close");
         btnCancel.setBounds(450, 40, 80, 25);
         btnCancel.addActionListener(e -> dispose());
         pane.add(btnCancel);
 
         // Edit button
         btnEdit = new JButton("Edit");
-        btnEdit.setBounds(450, 160, 100, 29);
+        btnEdit.setBounds(450, 80, 80, 25);
         btnEdit.addActionListener(e -> {
             if (!isEditMode) {
                 enterEditMode();
@@ -145,16 +145,16 @@ public class JobGUI extends JFrame {
         pane.add(btnEdit);
 
         // Save, Reset, Close (initialized but not added until edit mode)
-        btnSave = new JButton("Save");
-        btnSave.setBounds(450, 200, 100, 25);
-        btnSave.addActionListener(e -> saveChanges());
+        // btnSave = new JButton("Save");
+        // btnSave.setBounds(450, 200, 100, 25);
+        // btnSave.addActionListener(e -> saveChanges());
 
         btnReset = new JButton("Reset");
-        btnReset.setBounds(450, 240, 100, 25);
+        btnReset.setBounds(450, 120, 80, 25);
         btnReset.addActionListener(e -> populateFieldsFromJob(job));
 
-        btnClose = new JButton("Close");
-        btnClose.setBounds(450, 280, 100, 25);
+        btnClose = new JButton("Cancel");
+        btnClose.setBounds(450, 160, 80, 25);
         btnClose.addActionListener(e -> exitEditMode());
     }
 
@@ -182,14 +182,14 @@ public class JobGUI extends JFrame {
 
         btnEdit.setText("Save");
 
-        if (btnSave.getParent() == null) {
-        pane.add(btnSave);
-        pane.add(btnReset);
-        pane.add(btnClose);
-    }
+    //     if (btnSave.getParent() == null) {
+    //     //pane.add(btnSave);
+    //     pane.add(btnReset);
+    //     pane.add(btnClose);
+    // }
 
         // Add buttons
-        pane.add(btnSave);
+        //pane.add(btnSave);
         pane.add(btnReset);
         pane.add(btnClose);
         pane.revalidate();
@@ -208,7 +208,7 @@ public class JobGUI extends JFrame {
         btnEdit.setText("Edit");
 
         // Remove buttons
-        pane.remove(btnSave);
+        //pane.remove(btnSave);
         pane.remove(btnReset);
         pane.remove(btnClose);
         pane.revalidate();
