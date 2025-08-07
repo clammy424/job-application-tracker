@@ -4,6 +4,7 @@ package main;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -48,6 +49,15 @@ public class JobGUI extends JFrame {
 
         initComponents();
         populateFieldsFromJob(job);
+    }
+
+    private int findJobRow(int jobId) {
+    for (int i = 0; i < jobTableModel.getRowCount(); i++) {
+        if ((int) jobTableModel.getValueAt(i, 0) == jobId) {
+            return i;
+        }
+    }
+    return -1; // not found
     }
 
     private void initComponents() {
@@ -105,10 +115,16 @@ public class JobGUI extends JFrame {
         pane.add(txtLocation);
 
         // Todo List
-        JList<String> todoJList = new JList<>(todoListModel);
-        JScrollPane scrollPane = new JScrollPane(todoJList);
-        scrollPane.setBounds(70, 250, 400, 100);
-        pane.add(scrollPane);
+        // JList<String> todoJList = new JList<>(todoListModel);
+        // JScrollPane scrollPane = new JScrollPane(todoJList);
+        // scrollPane.setBounds(70, 250, 400, 100);
+        // pane.add(scrollPane);
+
+        txtTodoList = new JTextArea();
+        txtTodoList.setBounds(70, 250, 400, 100); // example dimensions
+        txtTodoList.setLineWrap(true);
+        txtTodoList.setWrapStyleWord(true);
+        pane.add(txtTodoList);
 
         // Cancel button
         btnCancel = new JButton("Cancel");
@@ -166,6 +182,12 @@ public class JobGUI extends JFrame {
 
         btnEdit.setText("Save");
 
+        if (btnSave.getParent() == null) {
+        pane.add(btnSave);
+        pane.add(btnReset);
+        pane.add(btnClose);
+    }
+
         // Add buttons
         pane.add(btnSave);
         pane.add(btnReset);
@@ -194,16 +216,37 @@ public class JobGUI extends JFrame {
     }
 
     private void saveChanges() {
-    job.setCompany(txtCompany.getText());
-    job.setRole(txtRole.getText());
-    job.setStatus(txtStatus.getText());
-    job.setSalary(txtSalary.getText());
-    job.setLocation(txtLocation.getText());
+    // Load jobs from file
+    ArrayList<Job> jobs = fm.loadJobs();
 
-    fm.save(job);
+    // Update the job in the list
+    for (int i = 0; i < jobs.size(); i++) {
+        if (jobs.get(i).getID() == job.getID()) {
+            jobs.set(i, new Job(
+                job.getID(),
+                txtCompany.getText(),
+                txtRole.getText(),
+                txtSalary.getText(),
+                txtStatus.getText(),
+                txtLocation.getText(),
+                job.getTodoList()
+            ));
+            break;
+        }
+    }
 
-    if (rowIndex >= 0) {
-        jobTableModel.updateJob(rowIndex, job);
+    // Save changes to file
+    fm.rewrite(jobs);
+
+
+    // Update table model immediately
+    int rowIndex = findJobRow(job.getID());
+    if (rowIndex != -1) {
+        jobTableModel.setValueAt(txtCompany.getText(), rowIndex, 1);
+        jobTableModel.setValueAt(txtRole.getText(), rowIndex, 2);
+        jobTableModel.setValueAt(txtSalary.getText(), rowIndex, 3);
+        jobTableModel.setValueAt(txtStatus.getText(), rowIndex, 4);
+        jobTableModel.setValueAt(txtLocation.getText(), rowIndex, 5);
     }
 
     exitEditMode();
