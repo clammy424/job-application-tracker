@@ -36,6 +36,12 @@ public class TodoList {
         tasks.get(index).setCompleted(false);
     }
 
+    public void removeTaskAt(int index) {
+        if (index >= 0 && index < tasks.size()) {
+            tasks.remove(index);
+        }
+    }
+
     public static TodoList parser(String line) {
         TodoList todoList = new TodoList();
 
