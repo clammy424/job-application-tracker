@@ -46,8 +46,45 @@ public class MainGUI extends JFrame {
 		searchBar.setBounds(100,50,353,26);
 		pane.add(search);
 		pane.add(searchBar);
+		String keyword = searchBar.getText();
+		searchBar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String keyword = searchBar.getText();
+				ArrayList<Job> jobs = fm.loadJobs();
+				jobTableModel.setRowCount(0); // Clear existing rows
+				for (Job job : jobs) {
+					if (job.getCompany().toLowerCase().contains(keyword.toLowerCase()) ||
+						job.getRole().toLowerCase().contains(keyword.toLowerCase())) {
+						jobTableModel.addJob(job);
+					}
+				}
+			}
+		});
 
-		// TODO: view list of jobs
+		//clear search results
+		JButton clearButton = new JButton("Clear search");
+		clearButton.setFont(new Font("Arial", Font.PLAIN, 10));
+		clearButton.setBounds(475, 120, 100, 26);
+		pane.add(clearButton);
+
+		//Clear button action
+		clearButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				searchBar.setText(""); // empty search bar
+
+				ArrayList<Job> allJobs = fm.loadJobs();
+				jobTableModel.setRowCount(0); // clear table
+				for (Job job : allJobs) {
+					if (job != null) {
+						jobTableModel.addJob(job);
+					}
+				}
+			}
+		});
+
+		
 		ArrayList<Job> jobList = fm.loadJobs();
 		jobTableModel = new JobTableModel();
 		for (Job j : jobList) {
@@ -64,7 +101,7 @@ public class MainGUI extends JFrame {
 		pane.add(scrollPane);
 
 		
-//		TODO: Implement btnAdd
+
 		btnAddNew = new JButton("Add Job");
 		btnAddNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -75,10 +112,9 @@ public class MainGUI extends JFrame {
 	    btnAddNew.setBounds(475, 50, 100, 29);
 	    pane.add(btnAddNew);
 		
-//		TODO: Implement btnDelete
+
 		btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
-			// implement
 			public void actionPerformed(ActionEvent e) {
 
 				ArrayList<Job> jobs = fm.loadJobs();
@@ -104,8 +140,6 @@ public class MainGUI extends JFrame {
 		pane.add(btnDelete);
 
 
-		
-		// TODO: Implement view one job feature
 		jobTable.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {
