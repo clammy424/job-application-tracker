@@ -241,7 +241,7 @@ public class JobGUI extends JFrame {
                     txtSalary.getText(),
                     txtStatus.getText(),
                     txtLocation.getText(),
-                    job.getTodoList()
+                    updatedTodoList
                 ));
                 break;
             }
