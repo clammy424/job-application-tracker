@@ -26,6 +26,6 @@ public class Task {
     }
     
     public String toString() {
-        return task + " - " + (completed ? "Completed" : "Incomplete");
+        return task;
     }
 }
