@@ -55,7 +55,8 @@ public class MainGUI extends JFrame {
 				jobTableModel.setRowCount(0); // Clear existing rows
 				for (Job job : jobs) {
 					if (job.getCompany().toLowerCase().contains(keyword.toLowerCase()) ||
-						job.getRole().toLowerCase().contains(keyword.toLowerCase())) {
+						job.getRole().toLowerCase().contains(keyword.toLowerCase()) ||
+						job.getLocation().toLowerCase().contains(keyword.toLowerCase())) {
 						jobTableModel.addJob(job);
 					}
 				}
